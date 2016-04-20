@@ -8,26 +8,27 @@ def h1(state):
 memo = {}
 
 
-def memoize(pos, board):
+def memoize(pos, state):
     if pos not in memo:
-        memo[pos] = horizontal(board, pos) + vertical(board, pos) + diagonaldown(board, pos) + diagonalup(board, pos)
+        memo[pos] = horizontal(state) + vertical(state) + diagonaldown(state) + diagonalup(state)
     return memo[pos]
 
 
-def horizontal(board, pos):
+def horizontal(state):
     return
 
 
-def vertical(board, pos):
+def vertical(state):
     return
 
 
-def diagonaldown(board, pos):
+def diagonaldown(state):
     return
 
 
-def diagonalup(board, pos):
+def diagonalup(state):
     return
 
 
 def h2(state):
+    return h1(state)
