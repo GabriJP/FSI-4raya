@@ -5,28 +5,15 @@ def h1(state):
     return random.randint(-100, 100)
 
 
-memo = {}
+def derecha(state):
+    return 0
 
 
-def memoize(pos, state):
-    if pos not in memo:
-        memo[pos] = horizontal(state) + vertical(state) + diagonaldown(state) + diagonalup(state)
-    return memo[pos]
+def izquierda(state):
+    return 0
 
 
 def horizontal(state):
-    return
-
-
-def vertical(state):
-    return
-
-
-def diagonaldown(state):
-    return
-
-
-def diagonalup(state):
     return
 
 
