@@ -1,8 +1,9 @@
 from utils import *
 
-"""
+
 def h1(state):
     return random.randint(-100, 100)
+
 
 def derecha(move, state):
     result = 0
@@ -50,18 +51,17 @@ def h2(state):
         return horizontal(state)
     else:
         return -horizontal(state)
-"""
 
 
-def recorre(board, move, player, (delta_x, delta_y)):
+def recorre(move, state, (delta_x, delta_y)):
     n = 0  # n is number of moves in row
     heuristica = 0
 
     x, y = move
     x, y = x + delta_x, y + delta_y
     add = 100
-    while not board.get((x, y)) != player:
-        if board.get((x, y)):
+    while (x, y) in state.moves or state.board.get((x, y), '.') == state.to_move:
+        if (x, y) in state.board:
             heuristica += 2 * add
         else:
             heuristica += add
@@ -72,8 +72,8 @@ def recorre(board, move, player, (delta_x, delta_y)):
     x, y = move
     x, y = x - delta_x, y - delta_y
     add = 100
-    while board.get((x, y)) == player:
-        if board.get((x, y)):
+    while (x, y) in state.moves or state.board.get((x, y), '.') == state.to_move:
+        if (x, y) in state.board:
             heuristica += 2 * add
         else:
             heuristica += add
@@ -85,7 +85,6 @@ def recorre(board, move, player, (delta_x, delta_y)):
 
 
 def h3(state):
-
     if state.utility == 1:
         return infinity
     elif state.utility == -1:
@@ -97,9 +96,9 @@ def h3(state):
     heuristica = 0
 
     for move in legal_moves:
-        heuristica += recorre(state.board, move, state.to_move, (0, 1))
-        heuristica += recorre(state.board, move, state.to_move, (1, 0))
-        heuristica += recorre(state.board, move, state.to_move, (1, -1))
-        heuristica += recorre(state.board, move, state.to_move, (1, 1))
+        heuristica += recorre(move, state, (0, 1))
+        heuristica += recorre(move, state, (1, 0))
+        heuristica += recorre(move, state, (1, -1))
+        heuristica += recorre(move, state, (1, 1))
 
-    return heuristica
+    return if_(state.to_move == 'X', heuristica, -heuristica)

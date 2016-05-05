@@ -15,6 +15,7 @@ while True:
     game.display(state)
 
     if player == 'O':
+        """
         col_str = raw_input("Movimiento: ")
         coor = int(str(col_str).strip())
         x = coor
@@ -26,11 +27,19 @@ while True:
 
         state = game.make_move((x, y), state)
         player = 'X'
+        """
+        print "Thinking..."
+        #move = games.minimax_decision(state, game)
+        #move = games.alphabeta_full_search(state, game)
+        move = games.alphabeta_search(state, game, eval_fn=h.h3, d=2 )
+
+        state = game.make_move(move, state)
+        player = 'X'
     else:
         print "Thinking..."
         #move = games.minimax_decision(state, game)
         #move = games.alphabeta_full_search(state, game)
-        move = games.alphabeta_search(state, game, eval_fn=h.h3)
+        move = games.alphabeta_search(state, game, eval_fn=h.h3, d=3)
 
         state = game.make_move(move, state)
         player = 'O'
