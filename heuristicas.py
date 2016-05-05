@@ -53,43 +53,28 @@ def h2(state):
         return -horizontal(state)
 
 
-def recorre(move, state, (delta_x, delta_y)):
-    n = 0  # n is number of moves in row
+def evaluate(move, state, (delta_x, delta_y)):
     heuristica = 0
 
-    x, y = move
-    x, y = x + delta_x, y + delta_y
-    add = 100
-    while (x, y) in state.moves or state.board.get((x, y), '.') == state.to_move:
-        if (x, y) in state.board:
-            heuristica += 2 * add
+    x, y = move[0] + delta_x, move[1] + delta_y
+    add = 1000000000
+    while (x, y) in state.moves or (x, y) in state.board:
+        encontrado = state.board.get((x, y), '.')
+        if encontrado == '.':
+            heuristica += if_(state.to_move == 'X', add, -add)
         else:
-            heuristica += add
-        add -= 10
-        n += 1
+            heuristica += if_(encontrado == 'X', 2 * add, -2 * add)
+
+        add /= 10
         x, y = x + delta_x, y + delta_y
+    return heuristica
 
-    x, y = move
-    x, y = x - delta_x, y - delta_y
-    add = 100
-    while (x, y) in state.moves or state.board.get((x, y), '.') == state.to_move:
-        if (x, y) in state.board:
-            heuristica += 2 * add
-        else:
-            heuristica += add
-        add -= 10
-        n += 1
-        x, y = x - delta_x, y - delta_y
 
-    return if_(n < 4, 0, heuristica)
+def recorre(move, state, (delta_x, delta_y)):
+    return evaluate(move, state, (delta_x, delta_y)) + evaluate(move, state, (-delta_x, -delta_y))
 
 
 def h3(state):
-    if state.utility == 1:
-        return infinity
-    elif state.utility == -1:
-        return -infinity
-
     legal_moves = [(x, y) for (x, y) in state.moves
                    if y == 1 or (x, y - 1) in state.board]
 
@@ -101,4 +86,4 @@ def h3(state):
         heuristica += recorre(move, state, (1, -1))
         heuristica += recorre(move, state, (1, 1))
 
-    return if_(state.to_move == 'X', heuristica, -heuristica)
+    return heuristica
