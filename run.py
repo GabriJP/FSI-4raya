@@ -30,7 +30,7 @@ while True:
         print "Thinking..."
         #move = games.minimax_decision(state, game)
         #move = games.alphabeta_full_search(state, game)
-        move = games.alphabeta_search(state, game, eval_fn=h.h2)
+        move = games.alphabeta_search(state, game, eval_fn=h.h3)
 
         state = game.make_move(move, state)
         player = 'O'
