@@ -8,7 +8,7 @@ game = games.ConnectFour()
 state = game.initial
 
 
-player = 'X'
+player = 'O'
 
 while True:
     print "Jugador a mover:", game.to_move(state)

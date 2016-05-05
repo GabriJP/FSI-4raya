@@ -75,6 +75,9 @@ def recorre(move, state, (delta_x, delta_y)):
 
 
 def h3(state):
+    if state.utility is not 0:
+        return state.utility * infinity
+
     legal_moves = [(x, y) for (x, y) in state.moves
                    if y == 1 or (x, y - 1) in state.board]
 
