@@ -90,3 +90,7 @@ def h3(state):
         heuristica += recorre(move, state, (1, 1))
 
     return heuristica
+
+
+def h4(state):
+    return -h3(state)
