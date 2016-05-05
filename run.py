@@ -1,17 +1,25 @@
+from __future__ import print_function
+from __future__ import print_function
+from __future__ import print_function
+from __future__ import print_function
+from __future__ import print_function
+from __future__ import print_function
 import games
 
-#game = games.TicTacToe(h=3,v=3,k=3)
+# game = games.TicTacToe(h=3,v=3,k=3)
 import heuristicas as h
 
 game = games.ConnectFour()
 
 state = game.initial
 
-
 player = 'X'
 
+import time
+
 while True:
-    print "Jugador a mover:", game.to_move(state)
+    t1 = time.clock()
+    print("Jugador a mover:", game.to_move(state))
     game.display(state)
 
     if player == 'O':
@@ -28,23 +36,24 @@ while True:
         state = game.make_move((x, y), state)
         player = 'X'
         """
-        print "Thinking..."
-        #move = games.minimax_decision(state, game)
-        #move = games.alphabeta_full_search(state, game)
+        print("Thinking...")
+        # move = games.minimax_decision(state, game)
+        # move = games.alphabeta_full_search(state, game)
         move = games.alphabeta_search(state, game, eval_fn=h.h4, d=4)
 
         state = game.make_move(move, state)
         player = 'X'
     else:
-        print "Thinking..."
-        #move = games.minimax_decision(state, game)
-        #move = games.alphabeta_full_search(state, game)
+        print("Thinking...")
+        # move = games.minimax_decision(state, game)
+        # move = games.alphabeta_full_search(state, game)
         move = games.alphabeta_search(state, game, eval_fn=h.h3, d=4)
 
         state = game.make_move(move, state)
         player = 'O'
-    print "-------------------"
+    print("-------------------")
     if game.terminal_test(state):
         game.display(state)
-        print "Final de la partida"
+        print("Final de la partida")
+        print("Tiempo: ", time.clock() - t1)
         break
