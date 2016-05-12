@@ -74,6 +74,18 @@ def recorre(move, state, (delta_x, delta_y)):
     return evaluate(move, state, (delta_x, delta_y)) + evaluate(move, state, (-delta_x, -delta_y))
 
 
+def memoize(f):
+    memo = {}
+
+    def helper(x):
+        if tuple(x.board.items()) not in memo:
+            memo[tuple(x.board.items())] = f(x)
+        return memo[tuple(x.board.items())]
+
+    return helper
+
+
+@memoize
 def h3(state):
     if state.utility is not 0:
         return state.utility * infinity
