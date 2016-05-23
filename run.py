@@ -2,6 +2,7 @@
 import games
 import heuristicas as h
 import time as t
+
 # game = games.TicTacToe(h=3,v=3,k=3)
 
 game = games.ConnectFour()
@@ -23,7 +24,7 @@ player = 'X'
 
 start = t.clock()
 
-#Cambiar valor si se quiere jugar contra humano o contra otra heurística
+# Cambiar valor si se quiere jugar contra humano o contra otra heurística
 
 heuristicaEnemiga = 1
 
@@ -69,5 +70,5 @@ while True:
     if game.terminal_test(state):
         game.display(state)
         print "Final de la partida"
-        print t.clock()-start
+        print t.clock() - start
         break

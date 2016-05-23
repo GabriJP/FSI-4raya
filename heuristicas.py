@@ -31,9 +31,10 @@ def memoize(f):
     memo = {}
 
     def helper(x):
-        if tuple(x.board.items()) not in memo:
-            memo[tuple(x.board.items())] = f(x)
-        return memo[tuple(x.board.items())]
+        tupla = tuple(x.board.items())
+        if tupla not in memo:
+            memo[tupla] = f(x)
+        return memo[tupla]
 
     return helper
 
