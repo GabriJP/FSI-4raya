@@ -3,7 +3,7 @@
 """
 
 from utils import *
-import random 
+import random
 
 #______________________________________________________________________________
 # Minimax Search
@@ -37,7 +37,7 @@ def minimax_decision(state, game):
 
 
 #______________________________________________________________________________
-    
+
 def alphabeta_full_search(state, game):
     """Search game to determine best action; use alpha-beta pruning.
     As in [Fig. 6.7], this version searches all the way to the leaves."""
@@ -162,7 +162,7 @@ class Game:
     def make_move(self, move, state):
         "Return the state that results from making a move from a state."
         abstract
-            
+
     def utility(self, state, player):
         "Return the value of this final state to player."
         abstract
@@ -264,7 +264,7 @@ class ConnectFour(TicTacToe):
     """A TicTacToe-like game in which you can only make a move on the bottom
     row, or in a square directly above an occupied square.  Traditionally
     played on a 7x6 board and requiring 4 in a row."""
-    
+
     def __init__(self, h=7, v=6, k=4):
         TicTacToe.__init__(self, h, v, k)
 
